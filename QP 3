@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// Function to check if a number is Disarium
+bool isDisarium(int num) {
+    int sum = 0, temp = num;
+    int len = to_string(num).length();
+    int pos = len;
+    while (temp > 0) {
+        int digit = temp % 10;
+        sum += pow(digit, pos);
+        temp /= 10;
+        pos--;
+    }
+    return sum == num;
+}
+
+// First n Disarium numbers
+void firstNDisarium(int n) {
+    int count = 0, num = 0;
+    while (count < n) {
+        if (isDisarium(num)) {
+            cout << num << " ";
+            count++;
+        }
+        num++;
+    }
+    cout << endl;
+}
+
+// Disarium numbers between two numbers
+void disariumInRange(int start, int end) {
+    for (int num = start; num <= end; num++) {
+        if (isDisarium(num)) {
+            cout << num << " ";
+        }
+    }
+    cout << endl;
+}
+
+int main() {
+    int n = 5;
+    cout << "First " << n << " Disarium numbers: ";
+    firstNDisarium(n);
+
+    int start = 1, end = 200;
+    cout << "Disarium numbers between " << start << " and " << end << ": ";
+    disariumInRange(start, end);
+
+    return 0;
+}
